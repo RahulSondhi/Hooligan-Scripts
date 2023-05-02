@@ -2,13 +2,13 @@
 
 if [[ ! -d "$1" ]]
 then
-    echo "$DIRECTORY does not exist on your filesystem."
+    echo "$1 does not exist on your filesystem."
 		exit 0
 fi
 
 if [ -z "$2" ]
   then
-    echo "No file name was passed"
+    echo "No output file name was passed"
 		exit 0
 fi
 
@@ -23,9 +23,11 @@ do
 
   while IFS= read -r line; do
     echo "\"$line\"," >> $file_to_write
-	done < <( ascii-image-converter $eachfile --width 80 )
+	done < <( ascii-image-converter $eachfile -C --width 60 )
 
 	echo '],' >> $file_to_write
 done
 echo '}' >> $file_to_write
 echo 'export default emote' >> $file_to_write
+
+$(./ansi2unicode.sh $file_to_write)
