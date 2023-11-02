@@ -5,9 +5,9 @@ PSQL_MINOR_VERSION='4'
 
 # DB Docker Access
 DOCKER_NAME_PREFIX='Hooligan-PSQL-Docker'
-DB_NAME='test'
-DB_USER='test'
-DB_PASSWORD='test'
+DB_NAME='payments'
+DB_USER='payments'
+DB_PASSWORD='payments'
 
 # Internal Vars
 RED='\033[0;31m'
@@ -130,6 +130,20 @@ start_service(){
 		print_bullet "${RED}Docker volume not found. Creating Docker volume for DB."
 		docker volume create "$DOCKER_VOLUME_NAME"
 		print_bullet "${GREEN}Docker Volume Created."
+	fi
+
+	print_section_header "Checking if local Postgres db is open"
+	if [[ $(lsof -i:5432 -c postgres -a -t | wc -l) -gt 0 ]]; then
+		
+		print_bullet "${RED}Closing Local Postgres DBs hogging the ports"
+		if $MAC; then
+			brew services stop postgresql &> /dev/null;
+		else
+			sudo systemctl stop postgresql &> /dev/null;
+		fi
+
+	else
+		print_bullet "${GREEN}Local Postgres is not running"
 	fi
 
 	print_section_header "Checking if PSQL port is open"
