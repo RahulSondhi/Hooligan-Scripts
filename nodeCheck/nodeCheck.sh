@@ -1,4 +1,5 @@
 #!/bin/bash
+source "$(dirname $0)/../util/printUtil.sh"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -13,18 +14,6 @@ project_path="$1"
 
 # Change to the project directory
 cd "$project_path" || exit 1
-
-# Function to print a section header
-print_section_header() {
-  echo -e "\n${NC}$(printf '=%.0s' $(seq 80))"
-  echo -e "${NC}$1"
-  echo -e "${NC}$(printf '=%.0s' $(seq 80))"
-}
-
-# Function to print bullet points
-print_bullet() {
-  echo -e "${NC}  - $1"
-}
 
 # Check if jq is installed
 print_section_header "Checking for jq"

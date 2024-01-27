@@ -1,4 +1,6 @@
 #!/bin/bash 
+source "$(dirname $0)/../util/printUtil.sh"
+
 # Package Versioning
 PSQL_MAJOR_VERSION='15'
 PSQL_MINOR_VERSION='4'
@@ -15,18 +17,6 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 DOCKER_IMAGE_NAME=$DOCKER_NAME_PREFIX-$DB_NAME-$PSQL_MAJOR_VERSION.$PSQL_MINOR_VERSION
 DOCKER_VOLUME_NAME=$DOCKER_NAME_PREFIX-$DB_NAME-Data
-
-# Function to print a section header
-print_section_header() {
-  echo -e "\n${NC}$(printf '=%.0s' $(seq 80))"
-  echo -e "${NC}$1"
-  echo -e "${NC}$(printf '=%.0s' $(seq 80))"
-}
-
-# Function to print bullet points
-print_bullet() {
-  echo -e "${NC}=> $1"
-}
 
 # Function for CLI Checks
 cli_check() {
