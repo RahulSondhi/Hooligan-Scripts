@@ -1,0 +1,47 @@
+{
+	"generalExtensions": [
+		"oderwat.indent-rainbow",
+		"zhuangtongfa.material-theme",
+		"vscode-icons-team.vscode-icons",
+		"mechatroner.rainbow-csv",
+		"aaron-bond.better-comments",
+		"wix.vscode-import-cost",
+		"chrmarti.regex",
+		"Gruntfuggly.todo-tree",
+		"streetsidesoftware.code-spell-checker",
+		"quicktype.quicktype",
+		"pranaygp.vscode-css-peek",
+		"kamikillerto.vscode-colorize",
+		"EditorConfig.EditorConfig",
+		"esbenp.prettier-vscode",
+		"DavidAnson.vscode-markdownlint",
+		"SonarSource.sonarlint-vscode",
+		"donjayamanne.githistory",
+		"GitHub.vscode-pull-request-github",
+		"ms-vscode-remote.remote-wsl",
+		"ms-vscode.PowerShell",
+		"redhat.vscode-yaml",
+		"christian-kohler.path-intellisense",
+		"adpyke.codesnap",
+		"ms-azuretools.vscode-docker",
+		"ritwickdey.LiveServer",
+		"ritwickdey.live-sass"
+	],
+	"jsExtensions": [
+		"christian-kohler.npm-intellisense",
+		"xabikos.JavaScriptSnippets",
+		"dsznajder.es7-react-js-snippets",
+		"dbaeumer.vscode-eslint",
+		"deque-systems.vscode-axe-linter"
+	],
+	"dotNetExtensions": [
+		"ms-dotnettools.csdevkit",
+		"ms-dotnettools.vscodeintellicode-csharp",
+		"Fudge.auto-using"
+	],
+	"pythonExtensions": [
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"ms-toolsai.jupyter"
+	]
+}

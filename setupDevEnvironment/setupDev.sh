@@ -38,7 +38,9 @@ check_winget
 check_pwsh
 
 print_section_header "Installing Windows Apps"
-powershell -File "${currentDir}/installWindowsApps.ps1"
+# powershell -File "${currentDir}/installWindowsApps.ps1" || exit_on_error
+
+bash "${currentDir}/setupVSCode.sh" || exit_on_error
 
 print_pause
 exit 0

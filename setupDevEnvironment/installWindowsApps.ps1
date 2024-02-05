@@ -28,6 +28,7 @@ $windowExtensions = @(
 	'Microsoft.PowerToys'
 	'Microsoft.WindowsTerminal.Preview'
 	'Microsoft.PowerShell.Preview'
+	'jqlang.jq'
 )
 
 foreach ( $extension in $windowExtensions )
