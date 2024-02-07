@@ -25,7 +25,7 @@
 		"adpyke.codesnap",
 		"ms-azuretools.vscode-docker",
 		"ritwickdey.LiveServer",
-		"ritwickdey.live-sass"
+		"glenn2223.live-sass"
 	],
 	"jsExtensions": [
 		"christian-kohler.npm-intellisense",
@@ -36,8 +36,7 @@
 	],
 	"dotNetExtensions": [
 		"ms-dotnettools.csdevkit",
-		"ms-dotnettools.vscodeintellicode-csharp",
-		"Fudge.auto-using"
+		"ms-dotnettools.vscodeintellicode-csharp"
 	],
 	"pythonExtensions": [
 		"ms-python.python",

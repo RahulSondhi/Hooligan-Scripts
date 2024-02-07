@@ -22,6 +22,42 @@ function Write-SubHeader {
     Write-Output "`n==> $SubHeader"
 }
 
+function Install-WinGet {
+		param (
+				[Parameter(Mandatory=$true)]
+        [string]$Extension,
+				[Parameter()]
+				[bool]$Upgarde
+    )
+		
+    Write-SubHeader "Installing $extension"
+
+		if ( $Upgarde )
+		{
+			winget install --id=$extension --source=winget --exact --accept-source-agreements --accept-package-agreements --silent
+		}
+		else
+		{
+			winget install --id=$extension --no-upgrade --source=winget --exact --accept-source-agreements --accept-package-agreements --silent
+		}
+}
+
+#Enabling WSL
+Write-Header "Installing WSL"
+Write-SubHeader "Checking for WSL"
+wsl -l -v | out-null
+if ( -not ( $? ) )
+{
+	Write-Output "No Version of WSL Found"
+	Write-SubHeader "Installing WSL"
+	wsl --install -d Ubuntu	
+	read-host “Press ENTER Ubuntu is done setting up...”
+}
+else
+{
+	Write-Output "WSL already installed"
+}
+
 # Windows
 Write-Header "Downloading Extensions To Microsoft Terminals"
 $windowExtensions = @(
@@ -33,8 +69,7 @@ $windowExtensions = @(
 
 foreach ( $extension in $windowExtensions )
 {
-	Write-SubHeader "Installing $extension"
-  winget install $extension --exact --no-upgrade --accept-source-agreements --accept-package-agreements  
+	Install-WinGet $extension
 }
 
 # CLI Customization
@@ -48,8 +83,7 @@ $gitExtensions = @(
 
 foreach ( $extension in $gitExtensions )
 {
-	Write-SubHeader "Installing $extension"
-  winget install $extension --exact --no-upgrade --accept-source-agreements --accept-package-agreements 
+	Install-WinGet $extension
 }
 
 # Development Enviroment
@@ -65,19 +99,17 @@ $devExtensions = @(
 
 foreach ( $extension in $devExtensions )
 {
-	Write-SubHeader "Installing $extension"
-  winget install $extension --exact --no-upgrade --accept-source-agreements --accept-package-agreements 
+	Install-WinGet $extension
 }
 
 # Coding IDE
 Write-Header "Downloading Development Applications"
 $ideExtensions = @(
-	'Microsoft.VisualStudioCode.Insiders'
-	'Microsoft.VisualStudioCode.Insiders.CLI'
+	'Microsoft.VisualStudioCode'
+	'Microsoft.VisualStudioCode.CLI'
 )
 
 foreach ( $extension in $ideExtensions )
 {
-	Write-SubHeader "Installing $extension"
-  winget install $extension --exact --no-upgrade --accept-source-agreements --accept-package-agreements 
+	Install-WinGet $extension $true
 }

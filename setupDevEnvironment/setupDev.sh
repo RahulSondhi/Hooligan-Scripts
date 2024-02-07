@@ -11,7 +11,7 @@ exit_on_error() {
 }
 
 check_winget() {
-	print_section_header "Checking for WinGet"
+	print_section_sub_header "Checking for WinGet"
 	{
 		winget --version >/dev/null 2>&1
 		print_bullet "Winget Version Found: $(winget --version)"
@@ -23,7 +23,7 @@ check_winget() {
 }
 
 check_pwsh() {
-	print_section_header "Checking for Powershell"
+	print_section_sub_header "Checking for Powershell"
 	{
 		powershell -command "(Get-Variable PSVersionTable -ValueOnly).PSVersion" >/dev/null 2>&1
 		print_bullet "Powershell Found"
@@ -34,11 +34,12 @@ check_pwsh() {
 	}
 }
 
+print_section_header "Checking Prerequisites"
 check_winget
 check_pwsh
 
 print_section_header "Installing Windows Apps"
-# powershell -File "${currentDir}/installWindowsApps.ps1" || exit_on_error
+powershell -File "${currentDir}/installWindowsApps.ps1" || exit_on_error
 
 bash "${currentDir}/setupVSCode.sh" || exit_on_error
 
