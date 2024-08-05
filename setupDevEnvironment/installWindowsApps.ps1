@@ -1,4 +1,6 @@
 #!/usr/bin/env pwsh
+Import-Module "$PSScriptRoot/../util/printUtil.ps1"
+Import-Module "$PSScriptRoot/../util/installUtil.ps1"
 
 If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
 {
@@ -6,59 +8,7 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 	Break
 }
 
-function Write-Header {
-		param (
-        [string]$Header
-    )
-
-    Write-Output "`n===== |$Header| ====="
-}
-
-function Write-SubHeader {
-		param (
-        [string]$SubHeader
-    )
-		
-    Write-Output "`n==> $SubHeader"
-}
-
-function Install-WinGet {
-		param (
-				[Parameter(Mandatory=$true)]
-        [string]$Extension,
-				[Parameter()]
-				[bool]$Upgarde
-    )
-		
-    Write-SubHeader "Installing $extension"
-
-		if ( $Upgarde )
-		{
-			winget install --id=$extension --source=winget --exact --accept-source-agreements --accept-package-agreements --silent
-		}
-		else
-		{
-			winget install --id=$extension --no-upgrade --source=winget --exact --accept-source-agreements --accept-package-agreements --silent
-		}
-}
-
-#Enabling WSL
-Write-Header "Installing WSL"
-Write-SubHeader "Checking for WSL"
-wsl -l -v | out-null
-if ( -not ( $? ) )
-{
-	Write-Output "No Version of WSL Found"
-	Write-SubHeader "Installing WSL"
-	wsl --install -d Ubuntu	
-	read-host “Press ENTER Ubuntu is done setting up...”
-}
-else
-{
-	Write-Output "WSL already installed"
-}
-
-# Windows
+# Windows Extensions
 Write-Header "Downloading Extensions To Microsoft Terminals"
 $windowExtensions = @(
 	'Microsoft.PowerToys'
@@ -69,10 +19,8 @@ $windowExtensions = @(
 
 foreach ( $extension in $windowExtensions )
 {
-	Install-WinGet $extension
+	Install-WinGet -Extension $extension -Upgrade
 }
-
-# CLI Customization
 
 # Git
 Write-Header "Downloading Git + Github"
@@ -83,7 +31,7 @@ $gitExtensions = @(
 
 foreach ( $extension in $gitExtensions )
 {
-	Install-WinGet $extension
+	Install-WinGet -Extension $extension
 }
 
 # Development Enviroment
@@ -99,7 +47,7 @@ $devExtensions = @(
 
 foreach ( $extension in $devExtensions )
 {
-	Install-WinGet $extension
+	Install-WinGet -Extension $extension
 }
 
 # Coding IDE
@@ -111,5 +59,5 @@ $ideExtensions = @(
 
 foreach ( $extension in $ideExtensions )
 {
-	Install-WinGet $extension $true
+	Install-WinGet -Extension $extension -Upgrade
 }

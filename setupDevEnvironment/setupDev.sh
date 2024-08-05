@@ -41,7 +41,14 @@ check_pwsh
 print_section_header "Installing Windows Apps"
 powershell -File "${currentDir}/installWindowsApps.ps1" || exit_on_error
 
-bash "${currentDir}/setupVSCode.sh" || exit_on_error
+print_section_header "Setting Up WSL"
+powershell -File "${currentDir}/setupWSL.ps1" || exit_on_error
+
+print_section_header "Setting Up CLI"
+bash "${currentDir}/setupCLI.sh" || exit_on_error
+
+# print_section_header "Setting Up VSCode"
+# bash "${currentDir}/setupVSCode.sh" || exit_on_error
 
 print_pause
 exit 0

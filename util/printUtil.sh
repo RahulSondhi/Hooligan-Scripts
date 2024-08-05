@@ -51,5 +51,6 @@ print_pause() {
 
 # Exporting Functions
 export -f print_section_header
+export -f print_section_sub_header
 export -f print_bullet
 export -f print_pause
